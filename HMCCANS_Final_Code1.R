@@ -126,32 +126,32 @@ dfcummean<-dfilter2 %>% group_by(playerID) %>% transmute(playerID=playerID,
                                                        rookieAB=meanAB[3])
 
 
-#We've not created an ungodly amount of identical entries, so we need to filter them out
+#We've now created an ungodly amount of identical entries, so we need to filter them out
 Dfilter3<-unique(dfcummean)
 #finally, removing all of the entries that don't have a 4th arbwage,
 #though tbh they'll just be removed when i run a regression anyway.
 dfinal<-Dfilter3 %>% filter(!is.na(arbwage))
                                                     
-                                                    
+#Regression Time                                                    
 lmresults<-lm(arbwage ~ rookieWARoff+rookieWARdef+rookieHR+rookieOBP+rookieSLG+rookieRBI+rookieSB+rookieBABIP+rookieAB+rookieaward,data=dfinal)                                           
 summary(lmresults)
 
+#Standardizing Our Coefficients by Standard Deviations
 lmstd<-lm.beta(lmresults)
-view(lmstd)
 print(lmstd)
 
-#Scatterplotting Sig. Variables with Lm lines
+#Scatterplotting Sig. Variables with best fit lines
 WARplot<-ggplot(dfinal, aes(x=rookieWARoff, y=arbwage))+
                          geom_point(color='Goldenrod')+
                          geom_smooth(method='lm', se=FALSE, color='firebrick')
 
-
+#
 ABplot<-ggplot(dfinal, aes(x=rookieAB, y=arbwage))+
                         geom_point(color='Goldenrod')+
                         geom_smooth(method='lm', se=FALSE, color='firebrick')
                     
 
-#Pringing to add to
+#Printing our visualization outputs to add to our .tex file
 pdf("ggplot.pdf")
 print(WARplot)     # Plot 1 --> in the first page of PDF
 print(ABplot)     # Plot 2 ---> in the second page of the PDF
@@ -159,5 +159,5 @@ dev.off()
 
               
 
-modelsummary(lmresults, output='latex')
+#Create a Tex table for our final report as well
 stargazer(lmresults)
