@@ -145,7 +145,7 @@ WARplot<-ggplot(dfinal, aes(x=rookieWARoff, y=arbwage))+
                          geom_point(color='Goldenrod')+
                          geom_smooth(method='lm', se=FALSE, color='firebrick')
 
-#
+#At Bats
 ABplot<-ggplot(dfinal, aes(x=rookieAB, y=arbwage))+
                         geom_point(color='Goldenrod')+
                         geom_smooth(method='lm', se=FALSE, color='firebrick')
@@ -161,3 +161,8 @@ dev.off()
 
 #Create a Tex table for our final report as well
 stargazer(lmresults)
+#Note, for table 2, I couldn't get stargazer to reproduce the standardized
+#coefficients, so instead I reused the lmresults table and manually updated
+#it, which took 30 seconds and was way easier than figuring out the code lol
+#Please don't penalize me, you can still see that output in print and its
+#paper properly as well.
