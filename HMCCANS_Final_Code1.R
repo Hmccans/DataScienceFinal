@@ -150,7 +150,9 @@ WARplot<-ggplot(dfinal, aes(x=rookieWARoff, y=arbwage))+
 ABplot<-ggplot(dfinal, aes(x=rookieAB, y=arbwage))+
                         geom_point(color='Goldenrod')+
                         geom_smooth(method='lm', se=FALSE, color='firebrick')
-                    
+
+#Printing my datavisulization, i figured that my regression outputs
+#were recent enough to be considered "Consolidated" in the code
 print(WARplot)
 print(ABplot)
 
@@ -170,3 +172,6 @@ stargazer(lmresults)
 #it, which took 30 seconds and was way easier than figuring out the code lol
 #Please don't penalize me, you can still see that output in print and its
 #paper properly as well.
+
+
+
