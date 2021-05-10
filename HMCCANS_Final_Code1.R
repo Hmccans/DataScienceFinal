@@ -8,6 +8,7 @@ library(lm.beta)
 library(tidymodels)
 library(parsnip)
 library(wesanderson)
+library(stargazer)
 ###LOADING IN DATA###
 #Load in some of the data from Lahman's data sets that we're gonna be using at some point
 data(People) #gives us the Baseball Reference ID to connect to WAR and other advanced stats
@@ -150,6 +151,9 @@ ABplot<-ggplot(dfinal, aes(x=rookieAB, y=arbwage))+
                         geom_point(color='Goldenrod')+
                         geom_smooth(method='lm', se=FALSE, color='firebrick')
                     
+print(WARplot)
+print(ABplot)
+
 
 #Printing our visualization outputs to add to our .tex file
 pdf("ggplot.pdf")
