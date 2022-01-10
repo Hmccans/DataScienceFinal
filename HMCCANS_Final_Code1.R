@@ -143,8 +143,10 @@ print(lmstd)
 
 #Scatterplotting Sig. Variables with best fit lines
 WARplot<-ggplot(dfinal, aes(x=rookieWARoff, y=arbwage))+
-                         geom_point(color='Goldenrod')+
-                         geom_smooth(method='lm', se=FALSE, color='firebrick')+
+                         geom_point())+
+                         geom_smooth(method='lm', se=FALSE)+
+                         theme_economist()+
+                         scale_color_economist()
                          ggtitle("Wages by WAR")+
                          xlab("Total WAR (Years 1-3)")+
                          ylab("Log of Wages (Year 4)")
