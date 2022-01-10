@@ -7,7 +7,6 @@ library(dynlm)
 library(lm.beta)
 library(tidymodels)
 library(parsnip)
-library(wesanderson)
 library(stargazer)
 ###LOADING IN DATA###
 #Load in some of the data from Lahman's data sets that we're gonna be using at some point
@@ -31,7 +30,7 @@ battingst<-battingStats(data = Lahman::Batting,
 
 ###DATASET MANIPULATION TIME###
 #This section will involve filtering and combining our datasets to get them to where
-#They're useable and organized so it's all in one table
+#They're usable and organized so it's all in one table
 
 #Slim down to the variables we actually need
 DF<-tibble(baseballWAR)
@@ -144,14 +143,21 @@ print(lmstd)
 #Scatterplotting Sig. Variables with best fit lines
 WARplot<-ggplot(dfinal, aes(x=rookieWARoff, y=arbwage))+
                          geom_point(color='Goldenrod')+
-                         geom_smooth(method='lm', se=FALSE, color='firebrick')
+                         geom_smooth(method='lm', se=FALSE, color='firebrick')+
+                         ggtitle("Wages by WAR")+
+                         xlab("Total WAR (Years 1-3)")+
+                         ylab("Log of Wages (Year 4)")
+          
 
 #At Bats
 ABplot<-ggplot(dfinal, aes(x=rookieAB, y=arbwage))+
                         geom_point(color='Goldenrod')+
-                        geom_smooth(method='lm', se=FALSE, color='firebrick')
+                        geom_smooth(method='lm', se=FALSE, color='firebrick')+
+                        ggtitle("Wages by Total At Bats")+
+                        xlab("Total AB (Years 1-3)")+
+                        ylab("Log of Wages (Year 4)")
 
-#Printing my datavisulization, i figured that my regression outputs
+#Printing my #datavisulization, i figured that my regression outputs
 #were recent enough to be considered "Consolidated" in the code
 print(WARplot)
 print(ABplot)
