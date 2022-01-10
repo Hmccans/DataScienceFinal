@@ -8,6 +8,7 @@ library(lm.beta)
 library(tidymodels)
 library(parsnip)
 library(stargazer)
+library(ggthemes)
 ###LOADING IN DATA###
 #Load in some of the data from Lahman's data sets that we're gonna be using at some point
 data(People) #gives us the Baseball Reference ID to connect to WAR and other advanced stats
@@ -151,8 +152,10 @@ WARplot<-ggplot(dfinal, aes(x=rookieWARoff, y=arbwage))+
 
 #At Bats
 ABplot<-ggplot(dfinal, aes(x=rookieAB, y=arbwage))+
-                        geom_point(color='Goldenrod')+
-                        geom_smooth(method='lm', se=FALSE, color='firebrick')+
+                        geom_point()+
+                        geom_smooth(method='lm', se=FALSE,)+
+                        theme_economist()+
+                        scale_color_economist()+
                         ggtitle("Wages by Total At Bats")+
                         xlab("Total AB (Years 1-3)")+
                         ylab("Log of Wages (Year 4)")
